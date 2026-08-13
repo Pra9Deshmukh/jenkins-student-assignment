@@ -1,22 +1,24 @@
 pipeline {
- agent any
- stages {
- stage('Checkout') {
- steps {
-         checkout scm
- }
- }
- stage('Compile') {
- steps {
-         bat 'if not exist build mkdir build'
-         bat 'java -d build Hello.java'
- }
- }
- stage('Run') {
- steps {
-       bat 'java -cp build Hello'
- }
- }
- }
-}
+    agent any
 
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                bat 'if not exist build mkdir build'
+                bat 'javac -d build Hello.java'
+            }
+        }
+
+        stage('Run') {
+            steps {
+                bat 'java -cp build Hello'
+            }
+        }
+    }
+}
